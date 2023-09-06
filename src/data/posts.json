@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "asdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfg"
+    },
+    {
+        "id": 2, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규",
+        "viewCount": 2397, 
+        "contents": "contents"
+    },
+    {
+        "id": 3, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "contents"
+    },
+    {
+        "id": 4, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "contents"
+    },
+    {
+        "id": 5, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "contents"
+    },
+    {
+        "id": 6, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "contents"
+    },
+    {
+        "id": 7, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "contents"
+    },
+    {
+        "id": 8, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "contents"
+    },
+    {
+        "id": 9, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "contents"
+    },
+    {
+        "id": 10, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "contents"
+    },
+    {
+        "id": 11, 
+        "title":"게시물", 
+        "date": "2023-06-23", 
+        "writer": "김민규", 
+        "viewCount": 2397,
+        "contents": "contents"
+    }
+]

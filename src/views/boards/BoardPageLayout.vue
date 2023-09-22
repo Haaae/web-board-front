@@ -21,15 +21,6 @@
         </v-btn>
 
         <v-btn
-        class="pl-2"
-        text
-        @click="()=>this.$router.push('/boards/1/modify')"
-        >
-        modify
-        </v-btn>
-
-
-        <v-btn
         v-if="canCreatePost"
         right 
         absolute

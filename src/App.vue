@@ -6,17 +6,12 @@
       color="primary"
       dark
     >
-      <v-app-bar-nav-icon v-if="navCondition" @click="drawer = !drawer" class="hidden-lg-and-up"></v-app-bar-nav-icon>
+      <!-- app bar -->
+      <v-app-bar-nav-icon v-if="navCondition" @click="drawer = !drawer" class="hidden-lg-and-up"/>
 
       <v-icon @click="() => this.$router.push({name:'Main'})">mdi-home</v-icon>
 
-      <!-- 회원가입 버튼 -->
-
       <v-spacer />
-      
-      <v-btn @click="loginToggle">
-        Login: {{ isLoginUser }}
-      </v-btn>
 
       <!-- signup btn -->
       <v-btn 
@@ -27,20 +22,38 @@
       to="/signup">
       sign up
     </v-btn>
-    
+        
     <!-- signin btn -->
       <v-btn 
       v-if="!isLoginUser" 
       color="transparent" 
       depressed 
-      link to="/signin">
+      link 
+      to="/signin">
         sign in
       </v-btn>
 
+      <!-- logout btn -->
+      <v-btn 
+      v-if="isLoginUser" 
+      color="transparent" 
+      depressed
+      @click="logout">
+        logout
+      </v-btn>
+
       <!-- signin icon -->
-      <v-icon v-if="isLoginUser" large >
+      <v-btn
+      v-if="isLoginUser" 
+      link
+      to="/mypage"
+      color="primary"
+      depressed 
+      >
+        <v-icon large>
         mdi-account
-      </v-icon>
+        </v-icon>
+      </v-btn>
     </v-app-bar>
 
     <!-- <v-navigation-drawer permanent> -->
@@ -100,22 +113,24 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
+const userStore = 'userStore'
+
 export default {
   name: 'App',
   created() {
     this.drawer = !this.$vuetify.breakpoint.mdAndDown 
-    // 타이밍이 create가 맞는지 확인해보아야 함
   },
   data: () => ({
-    isMember: true,  // 원래 cookie로 확인해야 함
+    
     drawer: false,
-    member: {id: 'memberId', name: 'memberName'},
     items: [
           { 
             title: '게시판', 
-            action: ' mdi-view-dashboard', 
+            action: 'mdi-view-dashboard', 
             active: false, 
-            subjects: [{title: '일반 게시판', to:'/boards'}, {title: '익명 게시판', to:'/anonymous-boards'}]
+            subjects: [{title: '일반 게시판', to:'/boards'}]
           },
           { 
             title: '내 정보', 
@@ -138,29 +153,23 @@ export default {
         ],
     right: null,
   }),
+  methods: {
+    ...mapActions(userStore, ['logout'])
+  },
   computed: {
+    ...mapGetters(userStore, ['isLoginUser']),
     widthChange() {
       return this.$vuetify.breakpoint.mdAndDown;
     },
     navCondition() {
       return this.$route.path != '/signin' && this.$route.path != '/signup'
     },
-    isLoginUser() {
-      return this.$store.state.user.isLoginUser
-    }
+
   },
   watch: {
     widthChange() {
       this.drawer = !this.$vuetify.breakpoint.mdAndDown 
     },
-  },
-  methods: {
-    can() {
-      return true;
-    },
-    loginToggle() {
-      this.$store.commit("loginToggle")
-    }
   },
 };
 </script>

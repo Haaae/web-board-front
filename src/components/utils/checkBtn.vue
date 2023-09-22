@@ -1,9 +1,10 @@
 <template>
     <v-col>
         <v-btn 
-        v-if="!checked" @click="callback"
+        v-if="!checked" 
+        @click="callback"
         :loading='loading'
-        :disabled='loading'
+        :disabled='!invalid'
         >
             check
         </v-btn>
@@ -28,6 +29,7 @@ export default {
         callback: Function,
         loading: Boolean,
         checked: Boolean,
+        invalid: Boolean
     },
 }
 

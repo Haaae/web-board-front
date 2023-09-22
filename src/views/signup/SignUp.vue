@@ -84,6 +84,7 @@ import UsernameWindow from "/src/components/signup/usernameWindow.vue"
 import NicknameWindow from "/src/components/signup/nicknameWindow.vue"
 import PasswordWindow from "/src/components/signup/passwordWindow.vue"
 import SuccessWindow from "/src/components/signup/successWindow.vue"
+import { mapGetters } from 'vuex'
 
 
   export default {
@@ -102,10 +103,15 @@ import SuccessWindow from "/src/components/signup/successWindow.vue"
         nickname: '',
         password: '',
     }),
+    created() {
+        if (this.isLoginUser) {
+            this.$router.push({name: 'Main'})
+        }
+    },
     methods: {
         close() {
             if (this.step === this.windowNums.successWindow) {
-                this.$router.push('/')
+                this.$router.push({'name': 'Main'})
             } else {
                 this.$router.go(-1)
             }
@@ -126,6 +132,7 @@ import SuccessWindow from "/src/components/signup/successWindow.vue"
         }
     },
     computed: {
+        ...mapGetters('userStore', ['isLoginUser']),
       currentTitle: function () {
         switch (this.step) {
           case 1: return 'Sign-up'
@@ -134,11 +141,6 @@ import SuccessWindow from "/src/components/signup/successWindow.vue"
           default: return 'Account created'
         }
       },
-    },
-    watch: {
-        nickname() {
-            console.log(this.nickname)
-        }
     }
   }
 </script>

@@ -4,7 +4,7 @@ module.exports = {
     'vuetify'
   ],
   devServer: {
-    proxy: "http://127.0.0.1:8080"
+    proxy: "http://ec2-52-78-164-213.ap-northeast-2.compute.amazonaws.com:8080"
   }
 }
 // defineConfig({

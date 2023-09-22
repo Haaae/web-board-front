@@ -132,24 +132,18 @@ export default {
             active: false, 
             subjects: [{title: '일반 게시판', to:'/boards'}]
           },
-          { 
-            title: '내 정보', 
-            action: 'mdi-account', 
-            active: false, to:'/mypage', 
-            subjects: [{title: '내 정보', to:'/mypage'}, {title: '내가 쓴 글', to:'/mypage/posts'}]
-          },
-          { 
-            title: 'Admin', 
-            action: 'mdi-account-key', 
-            active: false, to:'/admin', 
-            subjects: [{title: '게시판 설정', to:'/admin'}]
-          },
-          { 
-            title: '대쉬보드', 
-            action: ' mdi-table', 
-            active: false, to:'/dashboard', 
-            subjects: [{title: '대쉬보드', to: '/dashboard'}]
-          },
+          // { 
+          //   title: '내 정보', 
+          //   action: 'mdi-account', 
+          //   active: false, to:'/mypage', 
+          //   subjects: [{title: '내 정보', to:'/mypage'}, {title: '내가 쓴 글', to:'/mypage/posts'}]
+          // },
+          // { 
+          //   title: 'Admin', 
+          //   action: 'mdi-account-key', 
+          //   active: false, to:'/admin', 
+          //   subjects: [{title: '게시판 설정', to:'/admin'}]
+          // },
         ],
     right: null,
   }),

@@ -108,11 +108,6 @@ const routes = [
   MyPage,
   AdminPage,
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    component: () => import('./views/Dashboard.vue')
-  },
-  {
     path: '/signin',
     name: 'MainSignIn',
     component: () => import('./views/signin/SignIn.vue')

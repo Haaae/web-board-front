@@ -1,6 +1,7 @@
 <template>
     <v-container fluid>
       <v-row >
+        <v-divider class="my-3" />
         <v-col 
         v-for="post in posts" 
         :key=post.id
@@ -9,12 +10,18 @@
           <v-card 
           height="200"
           link
-          :to="path + post.id.toString()"
+          :to="path + post.postId"
           >
-            <v-card-title>{{ post.title }}</v-card-title>
+            <v-card-title>
+              <!-- {{ post.title }} -->
+              <h4 class="text-truncate">
+                {{ post.title }}
+              </h4>
+            </v-card-title>
+            
             <v-card-text >
               <p class="text-truncate">
-                {{ post.contents }}
+                {{ post.content }}
               </p>
             </v-card-text>
 
@@ -24,61 +31,87 @@
 
             <v-card-actions>
               <v-list-item >
-                
-
+              
                 <v-row
                   justify="start"
                   class="mb-8"
                 >
                   <v-icon small class="mr-1">mdi-eye</v-icon>
                   
-                  <span class="subheading mr-2">{{ post.viewCount }}</span>
+                  <span class="subheading mr-2">{{ post.hits }}</span>
                   
                   <span class="mr-1">·</span>
                   
                   <v-icon small class="mr-1">mdi-clock</v-icon>
                   
-                  <span class="subheading">{{ post.date }}</span>
+                  <span class="subheading">
+                    {{ parseTime(post.createdDate) }}
+                  </span>
                 </v-row>
               </v-list-item>
             </v-card-actions>
-
           </v-card>
         </v-col>
       </v-row>
 
-      <v-row >
+      <v-divider class="my-3" />
+
+      <v-row class="justify-center">
         <!-- 페이지 -->
-        <div class="text-center pt-2">
+        <v-col>
           <v-pagination
-            :v-model="pageInfo.page"
-            :length="pageInfo.pageCount"
+            :v-model="page"
+            :length="pageCount"
+            @input="updatePage"
           />
-          <v-text-field
-            :value="pageInfo.itemsPerPage"
-            label="Items per page"
-            type="number"
-            min="-1"
-            max="15"
-            @input="itemsPerPage = parseInt($event, 10)"
-          />
-        </div>  
+        </v-col>
       </v-row>
-
-
     </v-container>
 </template>
 
 <script>
+import { format, register } from 'timeago.js'
+import koLocale from 'timeago.js/lib/lang/ko' 
+import { mapActions, mapMutations, mapState } from "vuex";
+
+register('ko', koLocale)
+
+const postListStore = 'postListStore'
 
 export default {
     name: "PostList",
-    props: {
-        posts: Object,
-        pageInfo: Object,
-        path: String
+    data() {
+      return {
+        path: this.$route.path + '/posts/'
+      }
+    },
+    created() {
+      this.fetch({
+        size: this.size,
+        page: this.page
+      });
+    },
+    methods: {
+      ...mapActions(postListStore, {
+        fetch: 'fetchPostList'
+      }),
+      ...mapMutations(postListStore, ['updatePageInfo']),
+
+      updatePage(pageIndex) {
+        
+        this.updatePageInfo(pageIndex)
+        this.fetch({
+          size: this.size,
+          page: this.page
+        })
+      },
+
+      parseTime(date) {
+        return format(date, 'ko')
+      }
+    },
+    computed: {
+      ...mapState(postListStore, ['size', 'page', 'posts', 'pageCount', 'test']),
     }
-
 }
-
 </script>

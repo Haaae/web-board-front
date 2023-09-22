@@ -12,21 +12,11 @@
         </v-row>
         <v-row>
           <v-col>
-            <validation-provider 
-            v-slot="{ errors }"
-            name="제목"
-            :rules="{ required: true, is_not: originalTitle}">
-              <v-text-field
-                v-model="post.title"
-                :counter="50"
-                label="제목"
-                name="title"
-                maxlength="50"
-                type="title"
-                :error-messages="errors"
-              >
-              </v-text-field>
-            </validation-provider>
+            <v-text-field
+              :value="post.title"
+              label="제목"
+              disabled
+            />
           </v-col>
         </v-row>
   
@@ -40,9 +30,9 @@
             <validation-provider 
             v-slot="{ errors }"
             name="내용"
-            :rules="{ required: true, is_not: originalcontext}">
+            :rules="{ required: true, is_not: post.content}">
               <v-textarea
-                v-model="post.context"
+                v-model="newContent"
                 filled
                 name="context"
                 hint="내용을 입력해주세요."
@@ -56,7 +46,10 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-btn block outlined color="blue" 
+            <v-btn 
+            block 
+            outlined 
+            color="blue" 
             type="submit"
             :disabled="invalid"
             > 
@@ -70,45 +63,36 @@
   </template>
   
 <script>
-import axios from 'axios'
 import '/plugin/vee-validation.js'
+import { mapGetters, mapActions } from 'vuex';
 
+const postDetailStore = 'postDetailStore'
+const userStore = 'userStore'
 
 export default {
-    name: "ModifyPostView",
-    create() {
-        this.fetch();
+  name: "ModifyPostView",
+  created() {
+    if (this.post.writerId !== this.userId) {
+      this.$router.push({name: 'Main'})
+    }
+
+    this.newContent = this.post.content
+  },
+  data() {
+    return {
+      newContent: ''
+    }
+  },
+  methods: {
+    ...mapActions(postDetailStore, ['updatePost']),
+    ...mapActions(userStore, ['renewSessionCookie']),
+    submit() {
+      this.updatePost({content: this.newContent})
     },
-    methods: {
-      submit() {
-        console.log(`제목: ${this.post.title}, 내용: ${this.post.context} 제출됨`)
-        // todo: 서버와 연결해서 데이터 전송 구현
-        // this.$fets.observer.validate()
-        // modifyClick()을 여기에서 수행해도 되는지 확인
-      },
-      fetch() {
-          axios.get(this.$route.fullPath)
-              .then((response) => {
-              console.log(response);
-          })
-              .catch((error) => {
-              console.log(error);
-          });
-      },
-    },
-    data() {
-        return {
-            originalTitle: '원래 제목',
-            originalcontext: '원래 내용',
-            post: {
-                id: null,
-                title: "",
-                context: "",
-                // 필요없음. creationDate: '',
-                isModified: false,
-                // 필요없음. comments: [],
-            },
-        };
-    },
+  },
+  computed: {
+    ...mapGetters(postDetailStore, ['post']),
+    ...mapGetters(userStore, ['userId', 'sessionId','cookieSessionKey']),
+  },
 }
 </script>

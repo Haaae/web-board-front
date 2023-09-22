@@ -65,7 +65,7 @@ extend('email', {
 extend('is_not', {
   ...is_not,
   message: '기존 내용과 수정 내용이 달라야 합니다.'
-})
+});
 
 // provider 에 :rules="{ confirmed: 'provider name 명을 적어주면 된다'}"
 extend('confirmed', {

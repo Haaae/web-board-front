@@ -1,33 +1,53 @@
 <template>
     <v-window-item :value="windowNum">
         <v-card-text>
-            <v-row class="mb-0">
-                <v-col cols="9">
-                    <validation-provider 
-                    v-slot="{ errors }"
-                    name="이메일"
-                    :rules="{required: true, email: true}"
-                    >
-                        <v-text-field
-                        label="Email"
-                        hint="This is the email you will use to login to your Vuetify account"
-                        v-model="username"
-                        :error-messages="errors"
-                        />
-                    </validation-provider>
-                </v-col>
-                <CheckBtn
-                class="mt-3"
-                :callback="validateUsername"
-                :loading="duplicationLoading"
-                :checked="duplicationChecked"
-                />
-            </v-row>
+            <validation-observer v-slot="{ invalid }" >
+                <v-row class="mb-0">
+                    <v-col cols="8">
+                        <validation-provider 
+                        v-slot="{ errors }"
+                        name="이메일"
+                        :rules="{required: true, email: true}"
+                        >
+                            <v-text-field
+                            label="Email"
+                            hint="This is the email you will use to login to your Vuetify account"
+                            v-model="username"
+                            :error-messages="errors"
+                            />
+                        </validation-provider>
+                    </v-col>
+
+                    <v-col class="mt-3">
+                        <v-btn 
+                        v-if="!duplicationChecked" 
+                        @click="validateUsername"
+                        :loading='duplicationLoading'
+                        :disabled='invalid || duplicationChecked'
+                        >
+                            check
+                        </v-btn>
+
+                        <v-btn
+                        v-if="duplicationChecked"
+                        color="primary"
+                        text
+                        >
+                            <v-icon large>
+                                mdi-check-circle
+                            </v-icon>
+                        </v-btn>
+                    </v-col>
+                </v-row>
+            </validation-observer>
+
            
+            <validation-observer v-slot="{ invalid }" >
+
             <v-row 
             v-if="duplicationChecked"
             >
-                <v-col cols="3">
+                <v-col cols="2">
                     <validation-provider 
                     v-slot="{ errors }"
                     name="코드"
@@ -49,11 +69,27 @@
                         {{ TimerStr }}
                     </v-btn>
                 </v-col>
-                <CheckBtn
-                class="mt-3"       :callback="verificationUsername"
-                :loading='verificationLoading'
-                :checked="verificationChecked"
-                />
+                <v-col class="mt-4">
+                    <v-btn 
+                    v-if="!verificationChecked" 
+                    @click="verificationUsername"
+                    :loading='verificationLoading'
+                    :disabled='invalid || verificationChecked'
+                    >
+                        check
+                    </v-btn>
+
+                    <v-btn
+                    v-if="verificationChecked"
+                    color="primary"
+                    text
+                    >
+                        <v-icon large>
+                            mdi-check-circle
+                        </v-icon>
+                    </v-btn>
+                </v-col>
+                
                 <v-btn
                 class="mt-7 mr-2"
                 color="primary"
@@ -63,13 +99,14 @@
                     resend
                 </v-btn>
             </v-row>
+        </validation-observer>
+
         </v-card-text>
     </v-window-item>
 </template>
 
 <script>
 import axios from 'axios'
-import CheckBtn from "/src/components/utils/checkBtn.vue"
 import '/plugin/vee-validation.js'
 
 export default {
@@ -78,11 +115,8 @@ export default {
         step: Number,
         windowNum: Number
     },
-    components: {
-        CheckBtn
-    },
     data: () => ({
-        username: 'alsrbtls88@gmail.com',
+        username: '',
         duplicationChecked: false,
         duplicationLoading: false,
 
@@ -98,6 +132,12 @@ export default {
         initUsernameWindow() {
             this.duplicationChecked = false
             this.duplicationLoading = false
+
+            this.verificationChecked = false
+            this.verificationLoading = false
+            
+            this.code = ''
+            this.Timer = null
         },
 
         validateUsername() {
@@ -125,13 +165,17 @@ export default {
                 email: this.username,
                 authCode: this.code
             })
-            .then(() => {
-                this.verificationChecked = true
-                this.Timer = null
-                this.step
+            .then(response => {
+                this.verificationChecked = response.data.isCertificated
+                
+                if (this.verificationChecked) {
+                    this.Timer = null
+                } else {
+                    this.code = ''
+                }
             })
-            .catch(error => {
-                alert(error.response.data.message)
+            .catch(() => {
+                alert('유효하지 않은 이메일입니다.')
             })
             this.verificationLoading = false
         },
@@ -141,8 +185,8 @@ export default {
                 email: this.username
             })
             // .then(() => {})
-            .catch(error => {
-                alert(error.response.data.message)
+            .catch(() => {
+                alert('인증 코드 발송에 실패했습니다.')
             })
         },
 

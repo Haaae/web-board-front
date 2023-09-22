@@ -1,48 +1,60 @@
 <template>
     <v-window-item :value="windowNum">
         <v-card-text>
-            <v-row>
-                <v-col
-                cols="8"
-                >
-                    <validation-provider 
-                    v-slot="{ errors }"
-                    name="닉네임"
-                    :rules="{required: true, max: 8, min:2}"
+            <validation-observer v-slot="{ invalid }" >
+                <v-row>
+                    <v-col
+                    cols="8"
                     >
-                        <v-text-field
-                        label="Nickname"
-                        hint="This is the nickname you will use in Poker Hand History"
-                        v-model="nickname"
-                        :error-messages="errors"
-                        />
-                    </validation-provider>
-                </v-col>
-                <v-col>
-                    <CheckBtn
-                        :callback="validateNickname"
-                        :loading="duplicationLoading"
-                        :checked="duplicationChecked"
-                        />
-                </v-col>
-            </v-row>
-            
+                        <validation-provider 
+                        v-slot="{ errors }"
+                        name="닉네임"
+                        :rules="{required: true, max: 8, min:2}"
+                        >
+                            <v-text-field
+                            label="Nickname"
+                            hint="This is the nickname you will use in Poker Hand History"
+                            v-model="nickname"
+                            :error-messages="errors"
+                            />
+                        </validation-provider>
+                    </v-col>
+
+                    <v-col class="mt-3">
+                        <v-btn 
+                        v-if="!duplicationChecked" 
+                        @click="validateNickname"
+                        :loading='duplicationLoading'
+                        :disabled='invalid || duplicationChecked'
+                        >
+                            check
+                        </v-btn>
+
+                        <v-btn
+                        v-if="duplicationChecked"
+                        color="primary"
+                        text
+                        >
+                            <v-icon large>
+                                mdi-check-circle
+                            </v-icon>
+                        </v-btn>
+                    </v-col>
+                </v-row>
+            </validation-observer>
+
         </v-card-text>
     </v-window-item>
 </template>
 
 <script>
 import axios from 'axios'
-import CheckBtn from "/src/components/utils/checkBtn.vue"
 
 export default ({
     name: 'UsernameWindow',
     props: {
         step: Number,
         windowNum: Number
-    },
-    components: {
-        CheckBtn
     },
     data: () => ({
         nickname: '',

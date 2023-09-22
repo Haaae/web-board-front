@@ -92,10 +92,7 @@ export default {
             }
         },
         confirmPassword () {
-            console.log(this.confirmPassword)
-            console.log(this.password)
             this.isSame = (this.password == this.confirmPassword)
-            console.log(`$this.isSame: ${(this.password == this.confirmPassword)}`)
         },
         isSame() {
             if (this.isSame) {

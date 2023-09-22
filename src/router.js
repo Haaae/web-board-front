@@ -4,8 +4,6 @@ import VueRouter from 'vue-router';
 import MainPageLayout from './views/main/MainPageLayout.vue'
 
 import BoardPageLayout from './views/boards/BoardPageLayout.vue'
-import AnonymousBoardPageLayout from './views/boards/AnonymousBoardPageLayout.vue'
-import AnonymousPostListView from './views/boards/AnonymousPostListView.vue'
 
 import PostListView from './views/boards/PostListView.vue'
 import PostDetailView from './views/boards/PostDetailView.vue'
@@ -45,42 +43,12 @@ const BoardPage = {
       component: PostDetailView,
     },
     {
-      path: 'create',
+      path: 'posts/create',
       name: 'CreatePost',
       component: CreatePostView,
     },
     {
-      path: ':postId/modify',
-      name: 'ModifyPost',
-      component: ModifyPostView,
-    },
-  ]
-}
-
-const AnonymousBoardPage = {
-  path: '/anonymous-boards',
-  name: 'AnonymousBoard',
-  component: AnonymousBoardPageLayout,
-  children: [
-    {
-      path: '',
-      name: 'PostList',
-      component: AnonymousPostListView,
-      // $route에 컴포넌트의 의존성을 해제하여 어디서나 컴포넌트를 사용할 수 있게 하여 재사용 및 테스트하기 쉽게 한다.
-      props: true,
-    },
-    {
-      path: 'posts/:postId',
-      name: 'AnonymousPostDetail',
-      component: PostDetailView,
-    },
-    {
-      path: 'create',
-      name: 'CreatePost',
-      component: CreatePostView,
-    },
-    {
-      path: ':postId/modify',
+      path: 'posts/:postId/modify',
       name: 'ModifyPost',
       component: ModifyPostView,
     },
@@ -137,7 +105,6 @@ const AdminPage = {
 const routes = [
   MainPage,
   BoardPage,
-  AnonymousBoardPage,
   MyPage,
   AdminPage,
   {

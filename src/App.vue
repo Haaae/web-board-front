@@ -42,11 +42,10 @@
         logout
       </v-btn>
 
-      <!-- signin icon -->
+      <!-- signin icon to="/mypage" -->
       <v-btn
       v-if="isLoginUser" 
       link
-      to="/mypage"
       color="primary"
       depressed 
       >
@@ -69,10 +68,10 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
-            Application
+            게시판
           </v-list-item-title>
           <v-list-item-subtitle>
-            subtext
+            자유롭게 글을 써보세요!
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>

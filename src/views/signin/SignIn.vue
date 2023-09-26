@@ -19,7 +19,7 @@
 						<v-form>
 							<validation-provider 
 							v-slot="{ errors }"
-							name="제목"
+							name="이메일"
 							:rules="{ required: true, email: true }">
 							
 								<v-text-field 
@@ -32,7 +32,7 @@
 
 							<validation-provider 
 							v-slot="{ errors }"
-							name="제목"
+							name="비밀번호"
 							:rules="{ required: true, password: true }">
 							<v-text-field
 								v-model="password"
@@ -102,10 +102,6 @@ export default {
 				username: this.username,
 				password : this.password
 			})
-			
-			if (this.isLoginUser) {
-				close()
-			}
 		}
     },
 	computed: {
@@ -113,6 +109,13 @@ export default {
 			'sessionId', 
 			'isLoginUser'
 		])
+	},
+	watch: {
+		isLoginUser() {
+			if (this.isLoginUser) {
+				this.$router.go(-1)
+			}
+		}
 	}
 }
 </script>

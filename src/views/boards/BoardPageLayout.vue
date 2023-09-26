@@ -22,6 +22,7 @@
 
         <v-btn
         v-if="canCreatePost"
+        :disabled="!isLoginUser"
         right 
         absolute
         @click="()=>this.$router.push({name:'CreatePost'})"
@@ -34,15 +35,17 @@
 
     <v-row>
       <!-- 중첩 라우트의 children에 따라 원하는 Component를 렌더링 -->
-      <router-view></router-view>
+      <router-view />
     </v-row>
   </v-container>
 </template>
   
 <script>
+import { mapGetters } from 'vuex'
   export default {
     name: "BoardPageLayout",
     computed: {
+      ...mapGetters('userStore', ['isLoginUser']),
       canCreatePost() {
         return this.$route.path == '/boards/' || this.$route.path == '/boards'
       },

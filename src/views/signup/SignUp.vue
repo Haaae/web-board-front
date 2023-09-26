@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import api from '@/store/utils/api'
 import UsernameWindow from "/src/components/signup/usernameWindow.vue"
 import NicknameWindow from "/src/components/signup/nicknameWindow.vue"
 import PasswordWindow from "/src/components/signup/passwordWindow.vue"
@@ -117,7 +117,7 @@ import { mapGetters } from 'vuex'
             }
         },
         async createUser() {
-            await axios.post('/users', {
+            await api.join({
                 username: this.username,
                 password: this.password,
                 nickname: this.nickname

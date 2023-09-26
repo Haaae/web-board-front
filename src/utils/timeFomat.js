@@ -11,14 +11,9 @@ function parseTime(date) {
   return format(date, 'ko')
 }
 
-// const dateIndex = 1
-
 function convertTimeFormat(dateTime) {
   const dateFormat = dayjs.utc(dateTime.substring(0, 23)).format()
 
-  // const dateTimeParts = dateTime.split(/[- : T .]/).slice(0, -1)
-  // dateTimeParts[dateIndex]--
-  // return parseTime(new Date(...dateTimeParts))
   return parseTime(new Date(dateFormat))
 }
 

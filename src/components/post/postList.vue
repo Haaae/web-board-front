@@ -70,7 +70,6 @@
 
 <script>
 import converTimeFormat from '@/utils/timeFomat.js'
-
 import { mapActions, mapMutations, mapState } from "vuex";
 
 const postListStore = 'postListStore'

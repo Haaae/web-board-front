@@ -85,14 +85,13 @@ export default {
   },
   methods: {
     ...mapActions(postDetailStore, ['updatePost']),
-    ...mapActions(userStore, ['renewSessionCookie']),
     submit() {
       this.updatePost({content: this.newContent})
     },
   },
   computed: {
     ...mapGetters(postDetailStore, ['post']),
-    ...mapGetters(userStore, ['userId', 'sessionId','cookieSessionKey']),
+    ...mapGetters(userStore, ['userId']),
   },
 }
 </script>

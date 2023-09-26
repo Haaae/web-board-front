@@ -44,7 +44,7 @@
                   <v-icon small class="mr-1">mdi-clock</v-icon>
                   
                   <span class="subheading">
-                    {{ parseTime(post.createdDate) }} {{ post.createdDate }}
+                    {{ parseTime(post.createdDate) }}
                   </span>
                 </v-row>
               </v-list-item>

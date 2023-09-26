@@ -1,14 +1,11 @@
 import api from '../utils/api'
 import router from '@/router'
-import { format, register } from 'timeago.js'
-import koLocale from 'timeago.js/lib/lang/ko'
-
-register('ko', koLocale)
+import converTimeFormat from '@/utils/timeFomat.js'
 
 class Post {
     constructor(postDto) {
       this.content = postDto.content
-      this.createdDate = format(postDto.createdDate, 'ko')
+      this.createdDate = converTimeFormat(postDto.createdDate)
       this.hits = postDto.hits
       this.isModified = postDto.isModified
       this.id = postDto.postId
@@ -22,7 +19,7 @@ class Post {
     constructor(commentDto) {
       this.id = commentDto.commentId
       this.content = commentDto.content
-      this.createdDate = format(commentDto.createdDate, 'ko')
+      this.createdDate = converTimeFormat(commentDto.createdDate)
       this.isDeleted = commentDto.isDeleted
       this.isModified = commentDto.isModified
       this.showReplyForm = false

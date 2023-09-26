@@ -30,7 +30,7 @@
               <v-icon small>
                 mdi-clock
               </v-icon>
-              {{ post.createdDate }}    
+              {{ post.createdDate }}
             </p>
           </v-col>
 

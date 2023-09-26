@@ -1,7 +1,7 @@
 <template>
     <v-container fluid>
+      <v-divider class="my-3" />
       <v-row >
-        <v-divider class="my-3" />
         <v-col 
         v-for="post in posts" 
         :key=post.id
@@ -13,7 +13,6 @@
           :to="path + post.postId"
           >
             <v-card-title>
-              <!-- {{ post.title }} -->
               <h4 class="text-truncate">
                 {{ post.title }}
               </h4>
@@ -45,7 +44,7 @@
                   <v-icon small class="mr-1">mdi-clock</v-icon>
                   
                   <span class="subheading">
-                    {{ parseTime(post.createdDate) }}
+                    {{ parseTime(post.createdDate) }} {{ post.createdDate }}
                   </span>
                 </v-row>
               </v-list-item>
@@ -70,11 +69,9 @@
 </template>
 
 <script>
-import { format, register } from 'timeago.js'
-import koLocale from 'timeago.js/lib/lang/ko' 
-import { mapActions, mapMutations, mapState } from "vuex";
+import converTimeFormat from '@/utils/timeFomat.js'
 
-register('ko', koLocale)
+import { mapActions, mapMutations, mapState } from "vuex";
 
 const postListStore = 'postListStore'
 
@@ -107,7 +104,7 @@ export default {
       },
 
       parseTime(date) {
-        return format(date, 'ko')
+        return converTimeFormat(date)
       }
     },
     computed: {

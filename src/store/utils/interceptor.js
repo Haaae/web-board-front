@@ -3,16 +3,14 @@ import { store } from '../index'
 import router from '@/router'
 
 const instance = axios.create({
-  // baseURL: 'http://ec2-52-78-164-213.ap-northeast-2.compute.amazonaws.com:8080',
-  timeout: 1000,
-  headers: {
-    // 'Content-Type' : 'application/json'
-  }
+  baseURL: process.env.VUE_APP_BASE_URL,
+  timeout: 30000,
+  withCredentials: process.env.VUE_APP_WITH_CREDENTIALS,
 })
 
 instance.interceptors.response.use(
   function (response) {
-      return response;
+    return response
   },
 
   function (error) {
@@ -26,15 +24,13 @@ instance.interceptors.response.use(
    // 요청이 전송되었고, 서버는 2xx 외의 상태 코드로 응답
       const errorCode = error.response.data.code
       const status = error.response.status
+
       if (status === 401 && errorCode === 'LOGIN-004') {
         store.commit('userStore/resetUser')
         router.push({name: 'MainSignIn'})
-      } else if (error.response.data.message) {
+      } else if (error.response.data.code && error.response.data.message) {
         alert(error.response.data.message)
       }
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
     } else if (error.request) {
       // 요청이 전송되었지만, 응답이 수신되지 않았습니다.
       // 'error.request'는 브라우저에서 XMLHtpRequest 인스턴스이고,

@@ -4,11 +4,6 @@ module.exports = {
     'vuetify'
   ],
   devServer: {
-    proxy: "http://ec2-52-78-164-213.ap-northeast-2.compute.amazonaws.com:8080"
-  }
+    proxy: process.env.VUE_APP_PROXY_URL
+  },
 }
-// defineConfig({
-//   transpileDependencies: [
-//     'vuetify'
-//   ]
-// })

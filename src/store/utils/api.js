@@ -11,6 +11,21 @@ const DELETE = 'delete'
 const PATCH = 'patch'
 
 export default {
+  join(data) {
+    return Send({
+      url: '/users',
+      method: POST,
+      data: data
+    })
+  },
+
+  validateNickname(nickname) {
+    return Send({
+      url: '/users/nicknames/' + nickname + '/exist',
+      method: GET
+    })
+  },
+
   doLogin(data) {
     return Send({
       url: User_URL_PREFIX + 'login',
@@ -27,7 +42,7 @@ export default {
 
   validateUsername(username) {
     return Send({
-      url: '/users/usernames/' + username,
+      url: '/users/usernames/' + username + '/exist',
       method: GET
     })
   },

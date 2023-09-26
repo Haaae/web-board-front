@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import api from '@/store/utils/api'
 
 export default ({
     name: 'UsernameWindow',
@@ -67,18 +67,18 @@ export default ({
             this.duplicationLoading = false
         },
 
-        validateNickname() {
+        async validateNickname() {
             this.duplicationLoading = true
-            axios.get('/users/nicknames/' + this.nickname)
-            .then(() => {
-                alert("이미 존재하는 닉네임입니다.")
-                this.duplicationLoading = false
-            })
-            .catch(async error => {
-                if (error.response.status === 400) {
-                    this.duplicationChecked = true
-                } else {
+
+            await api.validateNickname(this.nickname)
+            .then(response => {
+                const isExist = response.data.exist
+                
+                if (isExist) {
+                    alert("이미 존재하는 닉네임입니다.")
                     this.duplicationLoading = false
+                } else {
+                    this.duplicationChecked = true
                 }
             })
         },

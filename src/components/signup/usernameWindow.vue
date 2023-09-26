@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import api from '@/store/utils/api'
 import '/plugin/vee-validation.js'
 
 export default {
@@ -140,28 +140,27 @@ export default {
             this.Timer = null
         },
 
-        validateUsername() {
-            this.duplicationLoading = !this.duplicationLoading
-            axios.get('/users/usernames/' + this.username)
-            .then(() => {
-                alert("이미 가입된 이메일 주소입니다.")
-                this.duplicationLoading = !this.duplicationLoading
-            })
-            .catch(async error => {
-                if (error.response.status === 400) {
+        async validateUsername() {
+            this.duplicationLoading = true
+
+            await api.validateUsername(this.username)
+            .then(response => {
+                const isExist = response.data.exist
+                if (isExist) {
+                    this.duplicationLoading = false
+                    alert("이미 가입된 이메일 주소입니다.")
+                } else {
                     this.sendVerificationCode()
                     this.timeInit()
                     this.duplicationChecked = true
-                } else {
-                    this.duplicationLoading = !this.duplicationLoading
                 }
             })
         },
 
-        verificationUsername() {
+        async verificationUsername() {
             this.verificationLoading = true
             
-            axios.post('/users/emails/verifications', {
+            await api.verificationUsername({
                 email: this.username,
                 authCode: this.code
             })
@@ -180,10 +179,8 @@ export default {
             this.verificationLoading = false
         },
         
-        sendVerificationCode() {
-            axios.post('/users/emails/verification-requests', {
-                email: this.username
-            })
+        async sendVerificationCode() {
+            await api.sendVerificationCode({email: this.username})
             // .then(() => {})
             .catch(() => {
                 alert('인증 코드 발송에 실패했습니다.')

@@ -3,7 +3,6 @@ import router from '@/router'
 
 class User {
   constructor(userDto) {
-    this.isLoginUser = true
     this.id = userDto.id
     this.nickname = userDto.nickname
     this.role = userDto.role
@@ -13,8 +12,8 @@ class User {
 const userStore = {
   namespaced: true,
   state: {
+    isLoginUser : false,
     user: {
-      isLoginUser : false,
       id : Number,
       nickname : String,
       role: String,
@@ -26,17 +25,18 @@ const userStore = {
       return state.user.id
     },
     isLoginUser(state) {
-      return state.user.isLoginUser
+      return state.isLoginUser
     },
   },
 
   mutations: {
     login(state, payload) {
       state.user = new User(payload)
+      state.isLoginUser = true
     },
     resetUser(state) {
+      state.isLoginUser = false,
       state.user = {
-        isLoginUser : false,
         id : Number,
         nickname : String,
         role : String

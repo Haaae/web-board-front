@@ -79,8 +79,8 @@ class Post {
       await api.fetchPost(payload)
       .then((response) => {
         commit('fetchPostDetail', {
-          post: response.data.postDto,
-          comments: response.data.commentDtos
+          post: response.data.postDetail.post,
+          comments: response.data.postDetail.comments
         })
       })
     },

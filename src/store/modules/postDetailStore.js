@@ -30,7 +30,7 @@ class Post {
 
       this.replies = []
       if (commentDto.replies) {
-        commentDto.replies.forEach(reply => {
+        commentDto.replies.commentDtos.forEach(reply => {
           this.replies.push(new Comment(reply))
         })
       }

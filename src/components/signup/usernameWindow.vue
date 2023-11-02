@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import api from '@/store/utils/api'
+import api from '@/store/modules/user/api'
 import '/plugin/vee-validation.js'
 
 export default {

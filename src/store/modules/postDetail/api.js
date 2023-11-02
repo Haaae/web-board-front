@@ -1,6 +1,5 @@
-import Send from './interceptor'
+import Send from '../../utils/interceptor'
 
-const User_URL_PREFIX = '/users/'
 const POST_URL_PREFIX = '/posts/'
 const COMMENT_URL_PREFIX = '/comments'
 const SLASH = '/'
@@ -11,62 +10,6 @@ const DELETE = 'delete'
 const PATCH = 'patch'
 
 export default {
-  join(data) {
-    return Send({
-      url: '/users',
-      method: POST,
-      data: data
-    })
-  },
-
-  validateNickname(nickname) {
-    return Send({
-      url: '/users/nicknames/' + nickname + '/exist',
-      method: GET
-    })
-  },
-
-  doLogin(data) {
-    return Send({
-      url: User_URL_PREFIX + 'login',
-      method: POST,
-      data: data
-    })
-  },
-  doLogout() {
-    return Send({
-      url: User_URL_PREFIX + 'logout',
-      method: POST,
-    })
-  },
-
-  validateUsername(username) {
-    return Send({
-      url: '/users/usernames/' + username + '/exist',
-      method: GET
-    })
-  },
-  sendVerificationCode(data) {
-    return Send({
-      url: '/users/emails/verification-requests',
-      method: POST,
-      data: data
-    })
-  },
-  verificationUsername(data) {
-    return Send({
-      url: '/users/emails/verifications',
-      method: POST,
-      data: data
-    })
-  },
-
-  fetchPosts(size, page) {
-    return Send({
-      url: '/posts?size=' + size + '&page=' + page,
-      method: GET
-    })
-  },
 
   fetchPost(postId) {
     return Send({

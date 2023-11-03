@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row>
       <div
-      style="height: 50px;"
+      style="height: 20px;"
       >
 
       </div>

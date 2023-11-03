@@ -19,7 +19,7 @@
               height="150" 
               width="95%"
               link
-              :to="path + post.postId.toString()"
+              @click="routePost(post.postId)"
               >
                 <v-card-title>{{ post.title }}</v-card-title>
                 <v-card-text class="text-left text-truncate">
@@ -101,7 +101,7 @@
               height="80" 
               width="95%"
               link
-              :to="path + comment.commentId.toString()"
+              @click="routePost(comment.postId)"
               >
               
                 <v-card-text class="text-left text-truncate pb-0">
@@ -196,8 +196,16 @@ export default {
     },
 
     parseTime(date) {
-        return converTimeFormat(date)
-      }
+      return converTimeFormat(date)
+    },
+    routePost(postId) {
+      this.$router.push({
+        name: 'PostDetail',
+        params: {
+          postId: postId
+        }
+      })
+    }
   },
 
   computed: {
@@ -206,7 +214,6 @@ export default {
 
   data() {
     return {
-      path: this.$route.path + '/'
     }
   }
 

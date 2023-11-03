@@ -32,7 +32,7 @@
 
         <v-col class="pl-3" cols="auto" v-if="comment.writerId == post.writerId">
           <h5
-          v-if="comment.isModified" 
+          v-if="comment.isEdited" 
           class="font-weight-regular" style="color: red; font-size: 0.8rem;">
             * 수정됨
           </h5>

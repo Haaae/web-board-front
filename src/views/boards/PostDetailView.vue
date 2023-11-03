@@ -65,7 +65,7 @@
           class="font-weight-regular text--disabled" 
           style="font-size: 0.8em"
           >
-            {{ post.isModified ? '* 수정됨' : '' }}
+            {{ post.isEdited ? '* 수정됨' : '' }}
           </p>
         </v-col>
 

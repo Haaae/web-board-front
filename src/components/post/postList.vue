@@ -91,7 +91,7 @@ export default {
       ...mapActions(postListStore, {
         fetch: 'fetchPostList'
       }),
-      ...mapMutations(postListStore, ['updatePageInfo']),
+      ...mapMutations(postListStore, ['updatePage']),
 
       updatePage(pageIndex) {
         

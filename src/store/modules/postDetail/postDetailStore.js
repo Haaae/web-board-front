@@ -7,7 +7,7 @@ class Post {
       this.content = postDto.content
       this.createdDate = converTimeFormat(postDto.createdDate)
       this.hits = postDto.hits
-      this.isModified = postDto.isModified
+      this.isEdited = postDto.isEdited
       this.id = postDto.postId
       this.title = postDto.title
       this.commentCount = postDto.commentCount
@@ -22,7 +22,7 @@ class Post {
       this.content = commentDto.content
       this.createdDate = converTimeFormat(commentDto.createdDate)
       this.isDeleted = commentDto.isDeleted
-      this.isModified = commentDto.isModified
+      this.isEdited = commentDto.isEdited
       this.showReplyForm = false
       this.type = commentDto.type
       this.writer = commentDto.writer

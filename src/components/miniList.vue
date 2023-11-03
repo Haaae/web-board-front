@@ -8,8 +8,8 @@
           sticky
           color="primary"
         >
-        <!-- 컴포넌트로 뽑아낼 때 이 부분은 slot -->
-            <slot name="banner" />
+
+        <slot name="banner" />
         </v-banner>
           
           <v-row>

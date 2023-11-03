@@ -131,12 +131,12 @@ export default {
             active: false, 
             subjects: [{title: '일반 게시판', to:'/boards'}]
           },
-          // { 
-          //   title: '내 정보', 
-          //   action: 'mdi-account', 
-          //   active: false, to:'/mypage', 
-          //   subjects: [{title: '내 정보', to:'/mypage'}, {title: '내가 쓴 글', to:'/mypage/posts'}]
-          // },
+          { 
+            title: '내 정보', 
+            action: 'mdi-account', 
+            active: false, to:'/mypage', 
+            subjects: [{title: '내 정보', to:'/mypage'}, {title: '나의 컨텐츠', to:'/mypage/contents'}]
+          },
           // { 
           //   title: 'Admin', 
           //   action: 'mdi-account-key', 

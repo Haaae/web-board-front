@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import api from '@/store/utils/api'
+import api from '@/store/modules/user/api'
 import UsernameWindow from "/src/components/signup/usernameWindow.vue"
 import NicknameWindow from "/src/components/signup/nicknameWindow.vue"
 import PasswordWindow from "/src/components/signup/passwordWindow.vue"

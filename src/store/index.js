@@ -2,9 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate';
 
-import userStore from './modules/userStore'
-import postListStore from './modules/postListSotre'
-import postDetailStore from './modules/postDetailStore'
+import userStore from './modules/user/userStore'
+import postListStore from './modules/postList/postListSotre'
+import postDetailStore from './modules/postDetail/postDetailStore'
+import myPageStore from './modules/mypage/myPageStore';
 
 Vue.use(Vuex);
 
@@ -12,7 +13,8 @@ export const store = new Vuex.Store({
   modules: {
     userStore: userStore,
     postListStore: postListStore,
-    postDetailStore: postDetailStore
+    postDetailStore: postDetailStore,
+    myPageStore: myPageStore
   },
 
   plugins: [

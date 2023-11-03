@@ -43,9 +43,17 @@
                   
                   <v-icon small class="mr-1">mdi-clock</v-icon>
                   
-                  <span class="subheading">
+                  <span class="subheading mr-2">
                     {{ parseTime(post.createdDate) }}
                   </span>
+
+                  <span class="mr-1">·</span>
+
+                  <v-icon small class="mr-1">mdi-comment</v-icon>
+                  <span class="subheading">
+                    {{ post.commentCount }}
+                  </span>
+
                 </v-row>
               </v-list-item>
             </v-card-actions>

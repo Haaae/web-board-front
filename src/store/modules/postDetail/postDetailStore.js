@@ -10,6 +10,7 @@ class Post {
       this.isModified = postDto.isModified
       this.id = postDto.postId
       this.title = postDto.title
+      this.commentCount = postDto.commentCount
       this.writer = postDto.writer
       this.writerId = postDto.writerId
       this.newComment = ''

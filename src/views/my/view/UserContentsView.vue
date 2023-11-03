@@ -49,15 +49,21 @@
                         mdi-clock
                       </v-icon>
                       
-                      <span class="subheading" v-if="$vuetify.breakpoint.name != 'xs'">{{ parseTime(post.createdDate) }}</span>
+                      <span class="subheading mr-1" v-if="$vuetify.breakpoint.name != 'xs'">
+                        {{ parseTime(post.createdDate) }}
+                      </span>
 
-                      <v-spacer />
+                      <span class="mr-1" v-if="$vuetify.breakpoint.name != 'xs'">·</span>
                       
-                      <v-btn plain @click="deletePost(post.postId)">
-                        <v-icon large>
-                          mdi-delete
-                        </v-icon>
-                      </v-btn>
+                      <v-icon class="mr-1" v-if="$vuetify.breakpoint.name != 'xs'">
+                        mdi-comment
+                      </v-icon>
+                      
+                      <span class="subheading" v-if="$vuetify.breakpoint.name != 'xs'">
+                        {{ post.commentCount }}
+                      </span>
+                      
+
                     </v-row>
                   </v-list-item>
                 </v-card-actions>

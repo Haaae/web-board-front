@@ -47,6 +47,19 @@
           </p>
         </v-col>
 
+        <v-col class="py-0 pr-1 pl-2" cols="auto">
+          <p 
+          class="font-weight-regular text--disabled" 
+          style="font-size: 0.8em"
+          >    
+            <v-icon small class="ml-2">
+              mdi-comment
+            </v-icon>
+
+          {{ post.commentCount }}
+          </p>
+        </v-col>
+
         <v-col class="py-0" cols="auto">
           <p 
           class="font-weight-regular text--disabled" 

@@ -11,9 +11,8 @@ import CreatePostView from './views/boards/CreatePostView.vue'
 import ModifyPostView from './views/boards/ModifyPostView.vue'
 
 import MyPageLayout from './views/my/MyPageLayout.vue'
-import MyPageHomeView from './views/my/MyPageHomeView.vue'
-import PostListUserWorteView from './views/my/PostListUserWorteView.vue'
-import PostListRelatedKeywordView from './views/my/PostListRelatedKeywordView.vue'
+import MyPageHomeView from './views/my/view/MyPageHomeView.vue'
+import UserContentsView from './views/my/view/UserContentsView.vue'
 
 import AdminPageLayout from './views/admin/AdminPageLayout.vue'
 
@@ -66,25 +65,20 @@ const MyPage = {
       component: MyPageHomeView,
     },
     {
-      path: 'posts',
-      name: 'PostListUserWorte',
-      component: PostListUserWorteView,
+      path: 'contents',
+      name: 'UserContents',
+      component: UserContentsView,
     },
-    {
-      path: 'posts/keywords',
-      name: 'PostListRelatedKeyword',
-      component: PostListRelatedKeywordView,
-    },
-    {
-      path: 'posts/:postId',
-      name: 'PostDetail',
-      component: PostDetailView,
-    },
-    {
-      path: ':postId/modify',
-      name: 'ModifyPost',
-      component: ModifyPostView,
-    },
+    // {
+    //   path: 'posts/:postId',
+    //   name: 'PostDetail',
+    //   component: PostDetailView,
+    // },
+    // {
+    //   path: ':postId/modify',
+    //   name: 'ModifyPost',
+    //   component: ModifyPostView,
+    // },
   ]
 }
 

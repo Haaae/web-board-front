@@ -4,9 +4,15 @@ const User_URL_PREFIX = '/users/'
 
 const GET = 'get'
 const POST = 'post'
-
+const DELETE = 'delete'
 
 export default {
+  withdrawal() {
+    return Send({
+      url: '/users',
+      method: DELETE
+    })
+  },
   join(data) {
     return Send({
       url: '/users',

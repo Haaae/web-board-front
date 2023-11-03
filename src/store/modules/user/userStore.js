@@ -57,6 +57,13 @@ const userStore = {
         commit('resetUser')
         router.go(0)
       })
+    },
+    async withdrawal({ commit }) {
+      api.withdrawal()
+      .then(() => {
+        commit('resetUser')
+        router.push('Main')
+      })
     }
   }
 }

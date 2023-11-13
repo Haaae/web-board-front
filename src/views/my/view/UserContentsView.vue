@@ -138,6 +138,7 @@
               :v-model="commentPage.page"
               :length="commentPage.pageCount"
               @input="updateCommentPageIndex"
+              :total-visible="11"
             />
           </v-col>
         </v-row>  

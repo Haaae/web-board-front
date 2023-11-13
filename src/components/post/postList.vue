@@ -69,7 +69,8 @@
           <v-pagination
             :v-model="page"
             :length="pageCount"
-            @input="updatePage"
+            @input="updatePageInfo"
+            :total-visible="11"
           />
         </v-col>
       </v-row>
@@ -77,7 +78,7 @@
 </template>
 
 <script>
-import converTimeFormat from '@/utils/timeFomat.js'
+import converTimeFormat from '@/utils/timeFomat.js';
 import { mapActions, mapMutations, mapState } from "vuex";
 
 const postListStore = 'postListStore'
@@ -101,9 +102,9 @@ export default {
       }),
       ...mapMutations(postListStore, ['updatePage']),
 
-      updatePage(pageIndex) {
+      updatePageInfo(pageIndex) {
         
-        this.updatePageInfo(pageIndex)
+        this.updatePage(pageIndex)
         this.fetch({
           size: this.size,
           page: this.page

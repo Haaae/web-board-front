@@ -68,18 +68,6 @@
 
       <v-divider class="mb-0 mt-5" />
 
-      <!-- 페이지 -->
-      <!-- <v-row class="justify-center">
-        <v-col>
-          <v-pagination
-            :v-model="page"
-            :length="pageCount"
-            @input="updatePageInfo"
-            :total-visible="7"
-          />
-        </v-col>
-      </v-row> -->
-
       <v-row>
         <v-col >
           <paginate 

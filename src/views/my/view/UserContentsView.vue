@@ -72,16 +72,15 @@
           </template>
         </MiniList>
         
-        <v-row class="justify-center">
-          <!-- 페이지 -->
-          <v-col>
-            <v-pagination
-              :v-model="postPage.page"
-              :length="postPage.pageCount"
-              @input="updatePostPageIndex"
+        <!-- 페이지 -->
+        <v-row>
+          <v-col >
+            <paginate 
+              :page-count="postPage.pageCount"
+              :callback="updatePostPageIndex"
             />
           </v-col>
-        </v-row>  
+        </v-row>
       </v-col>
 
       <v-col cols="6">
@@ -131,17 +130,16 @@
           </template>
         </MiniList>
 
-        <v-row class="justify-center">
           <!-- 페이지 -->
-          <v-col>
-            <v-pagination
-              :v-model="commentPage.page"
-              :length="commentPage.pageCount"
-              @input="updateCommentPageIndex"
-              :total-visible="11"
+        <v-row>
+          <v-col >
+            <paginate 
+              :page-count="commentPage.pageCount"
+              :callback="updateCommentPageIndex"
             />
           </v-col>
-        </v-row>  
+        </v-row>
+
       </v-col>
     </v-row>
   </v-container>
@@ -150,15 +148,17 @@
 <script>
 import converTimeFormat from '@/utils/timeFomat.js'
 import MiniList from "/src/components/miniList.vue"
+import paginate from '@/components/pagination/pagination.vue'
 import { mapActions, mapMutations, mapState } from 'vuex'
+
 
 const MYPAGE_STORE = 'myPageStore'
 
 export default {
   name: "PostListUserWorteView",
   components: {
-    // PostList
-    MiniList
+    MiniList,
+    paginate
   },
 
   created() {

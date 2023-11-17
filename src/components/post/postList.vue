@@ -1,5 +1,10 @@
 <template>
     <v-container fluid>
+
+      <head>
+        <!-- <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css"> -->
+      </head>
+
       <v-divider class="my-3" />
       <v-row >
         <v-col 
@@ -61,35 +66,54 @@
         </v-col>
       </v-row>
 
-      <v-divider class="my-3" />
+      <v-divider class="mb-0 mt-5" />
 
-      <v-row class="justify-center">
-        <!-- 페이지 -->
+      <!-- 페이지 -->
+      <!-- <v-row class="justify-center">
         <v-col>
           <v-pagination
             :v-model="page"
             :length="pageCount"
             @input="updatePageInfo"
-            :total-visible="11"
+            :total-visible="7"
+          />
+        </v-col>
+      </v-row> -->
+
+      <v-row>
+        <v-col >
+          <paginate 
+            :page-count="pageCount"
+            :callback="updatePageInfo"
           />
         </v-col>
       </v-row>
+
     </v-container>
 </template>
 
 <script>
 import converTimeFormat from '@/utils/timeFomat.js';
 import { mapActions, mapMutations, mapState } from "vuex";
+import paginate from '@/components/pagination/pagination.vue'
 
 const postListStore = 'postListStore'
 
 export default {
     name: "PostList",
+
+    components: {
+      paginate
+    },
+
     data() {
       return {
-        path: this.$route.path + '/posts/'
+        path: this.$route.path + '/posts/',
+
+        pageData: {currentPage: 1}
       }
     },
+
     created() {
       this.fetch({
         size: this.size,
@@ -120,3 +144,47 @@ export default {
     }
 }
 </script>
+
+<!-- <style lang="css">
+  .page-container {
+    margin-top: 20px;
+    display: inline-block;
+    padding: 0%;
+    list-style: none;
+  }
+
+  .page-container li {
+    float: left;
+  }
+
+  .page-container a:hover {
+    color: #ffffff !important;
+    background-color: #2e9cdf;
+    cursor: default;
+    outline: none;
+  }
+
+  .page-container a {
+    border-radius: 100%;
+    margin-left: 5px !important;
+    margin-right: 5px !important;
+    width: 30px !important;
+    text-align: center;
+
+    display: block !important;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 5px, 12px;
+    color: #96a0ad !important;
+    line-height: 30px;
+  }
+  .page-container li.active a {
+    color: #ffffff !important;
+    background-color: #2e9cdf;
+    cursor: default;
+    outline: none;
+  }
+  .page-container li:active a {
+    outline: none;
+  }
+</style> -->

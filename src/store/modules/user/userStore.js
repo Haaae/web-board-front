@@ -62,7 +62,7 @@ const userStore = {
       api.withdrawal()
       .then(() => {
         commit('resetUser')
-        router.push('Main')
+        router.push({name: 'Main'})
       })
     }
   }

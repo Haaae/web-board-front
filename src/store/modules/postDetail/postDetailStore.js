@@ -11,7 +11,7 @@ class Post {
       this.id = post.postId
       this.title = post.title
       this.commentCount = post.commentCount
-      this.writer = post.writer
+      this.writer = post.writer ? post.writer : '탈퇴한 사용자'
       this.writerId = post.writerId
       this.newComment = ''
     }
@@ -25,7 +25,7 @@ class Post {
       this.isEdited = comment.isEdited
       this.showReplyForm = false
       this.type = comment.type
-      this.writer = comment.writer
+      this.writer = comment.writer ? comment.writer : '탈퇴한 사용자'
       this.writerId = comment.writerId
       this.newReply = ''
 

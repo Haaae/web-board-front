@@ -30,7 +30,7 @@
             </v-card-text>
 
             <v-card-subtitle >
-              {{  post.writer }}
+              {{  post.writer ? post.writer : "탈퇴한 사용자" }}
             </v-card-subtitle>
 
             <v-card-actions>

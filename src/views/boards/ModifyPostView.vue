@@ -1,6 +1,5 @@
 <template>
   <v-container fluid>
-    <h1>Modify Post</h1>
     <validation-observer ref="validator" v-slot="{ invalid }">
       <v-form 
       @submit.prevent="submit"

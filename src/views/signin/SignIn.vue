@@ -12,7 +12,7 @@
 				<validation-observer ref="validator" v-slot="{ invalid }">
 				<v-card>
 					<v-card-title>
-						<span class="text-h5">Login</span>
+						<span class="text-h5">Sing In</span>
 					</v-card-title>
 					<v-card-text>
 
